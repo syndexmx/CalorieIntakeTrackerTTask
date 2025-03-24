@@ -13,15 +13,10 @@ import lombok.NoArgsConstructor;
 public class DishDto {
 
     Long id;
-
     String name;
-
     Integer calories; // per unit
-
     Integer protein; // mg per unit
-
     Integer lipids; // mg per unit
-
     Integer carbohydrates; // mg per unit
 
 }

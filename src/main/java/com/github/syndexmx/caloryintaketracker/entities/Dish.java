@@ -1,22 +1,21 @@
 package com.github.syndexmx.caloryintaketracker.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
 @Entity
 @Table(name = "dishes")
 public class Dish {
 
     @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     String name;
