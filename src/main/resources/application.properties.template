@@ -1,0 +1,10 @@
+spring.application.name=caloryintaketracker
+
+#DataSource
+spring.datasource.url=jdbc:postgresql://localhost:5432/caloriesdb?currentSchema=public
+spring.datasource.username=POSTGRESS_USER_NAME
+spring.datasource.password=POSTGRESS_USER_PASSWORD
+
+# Show or not log for each sql query
+# Hibernate ddl auto (create, create-drop, update)
+spring.jpa.hibernate.ddl-auto = update
