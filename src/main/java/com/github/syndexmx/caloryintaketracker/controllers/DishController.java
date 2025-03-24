@@ -22,7 +22,7 @@ public class DishController {
 
     @PostMapping("/api/v0/dishes")
     public ResponseEntity<DishDto> createDish(@RequestBody DishDto dishDto) {
-        dishDto.setId(0L);
+        dishDto.setId(null);
         Dish createdDish = dishService.save(dishDtoToDish(dishDto));
         DishDto returnDishDto = dishToDishDto(createdDish);
         return new ResponseEntity<>(returnDishDto, HttpStatus.CREATED);
