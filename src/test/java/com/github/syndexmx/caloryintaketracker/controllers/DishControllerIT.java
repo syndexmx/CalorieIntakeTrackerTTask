@@ -19,6 +19,12 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishMapper.dishDtoToDish;
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishMapper.dishToDishDto;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
@@ -41,6 +47,46 @@ public class DishControllerIT {
                 .content(dishJson))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.content().json(dishJson));
+    }
+
+    @Test
+    public void testThatListReturnesWhenExists() throws Exception {
+        DishDto dishDto = TestDishDtos.getTestDishDto();
+        dishDto.setId(null);
+        final Dish dishSaved = dishService.create(dishDtoToDish(dishDto));
+        DishDto dishDto2 = TestDishDtos.getTestDishDto(2);
+        dishDto2.setId(null);
+        final Dish dishSaved2 = dishService.create(dishDtoToDish(dishDto2));
+        final List<DishDto> listDishDto = new ArrayList<>(List.of(
+                dishToDishDto(dishSaved),
+                dishToDishDto(dishSaved2)));
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final String dishListJson = objectMapper.writeValueAsString(listDishDto);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/dishes"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(dishListJson));
+    }
+
+    @Test
+    public void testThatRetrieveReturnsNotFoundWhenAbsent() throws Exception {
+        final Long nonExistentId = Long.MIN_VALUE;
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/api/v0/generics/" + nonExistentId))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    public void testThatRetrieveReturnsDishWhenExists() throws Exception {
+        Dish dish = TestDishes.getTestDish();
+        dish.setId(null);
+        final Dish dishSaved = dishService.create(dish);
+        final long id = dishSaved.getId();
+        final DishDto savedDishDto = dishToDishDto(dishSaved);
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final String genericJson = objectMapper.writeValueAsString(savedDishDto);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/dishes/" + id))
+                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(MockMvcResultMatchers.content().json(genericJson));
     }
 
 }

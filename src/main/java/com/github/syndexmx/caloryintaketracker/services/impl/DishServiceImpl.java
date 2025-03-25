@@ -6,6 +6,10 @@ import com.github.syndexmx.caloryintaketracker.services.DishService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class DishServiceImpl implements DishService {
 
@@ -17,7 +21,19 @@ public class DishServiceImpl implements DishService {
 
     @Override
     @Transactional
-    public Dish save(Dish dish) {
+    public Dish create(Dish dish) {
         return dishRepository.save(dish);
+    }
+
+    @Override
+    public List<Dish> listAll() {
+        final List<Dish> listOfDishes = dishRepository.findAll();
+        return listOfDishes;
+    }
+
+    @Override
+    public Optional<Dish> findById(Long id) {
+        final Optional<Dish> dishFound = dishRepository.findById(id);
+        return dishFound;
     }
 }
