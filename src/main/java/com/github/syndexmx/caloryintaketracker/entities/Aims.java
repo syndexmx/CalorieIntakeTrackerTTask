@@ -4,5 +4,6 @@ public enum Aims {
 
     LOOSING,
     KEEPING,
-    GAINING
+    GAINING;
+
 }

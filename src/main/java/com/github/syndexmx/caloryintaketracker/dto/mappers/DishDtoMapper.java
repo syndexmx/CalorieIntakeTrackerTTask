@@ -3,7 +3,7 @@ package com.github.syndexmx.caloryintaketracker.dto.mappers;
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
 
-public class DishMapper {
+public class DishDtoMapper {
 
     public static Dish dishDtoToDish(DishDto dishDto) {
         return Dish.builder()

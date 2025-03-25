@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class DishServiceImpl implements DishService {
@@ -20,7 +19,6 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    @Transactional
     public Dish create(Dish dish) {
         return dishRepository.save(dish);
     }
@@ -44,12 +42,12 @@ public class DishServiceImpl implements DishService {
 
     @Override
     @Transactional
-    public Optional<Dish> save(Dish dishToSave) {
-        boolean exists = dishRepository.existsById(dishToSave.getId());
+    public Optional<Dish> save(Dish dish) {
+        boolean exists = dishRepository.existsById(dish.getId());
         if (!exists) {
             return Optional.empty();
         }
-        final Dish dishSaved = dishRepository.save(dishToSave);
+        final Dish dishSaved = dishRepository.save(dish);
         return Optional.ofNullable(dishSaved);
     }
 

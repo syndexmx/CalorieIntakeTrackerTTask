@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishMapper.dishDtoToDish;
-import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishMapper.dishToDishDto;
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishDtoMapper.dishDtoToDish;
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishDtoMapper.dishToDishDto;
 
 @RestController
 @RequestMapping
