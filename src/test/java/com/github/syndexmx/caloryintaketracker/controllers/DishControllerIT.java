@@ -82,11 +82,25 @@ public class DishControllerIT {
         final Dish dishSaved = dishService.create(dish);
         final long id = dishSaved.getId();
         final DishDto savedDishDto = dishToDishDto(dishSaved);
+        dish.setId(id);
         final ObjectMapper objectMapper = new ObjectMapper();
-        final String genericJson = objectMapper.writeValueAsString(savedDishDto);
+        final String genericJson = objectMapper.writeValueAsString(dishToDishDto(dish));
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/dishes/" + id))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.content().json(genericJson));
+    }
+
+    @Test
+    public void testThatUpdateReturnsNotFoundWhenAbsent() throws Exception {
+        final DishDto dishDto = TestDishDtos.getTestDishDto(1000);
+        final Long pathVariableId = dishDto.getId();
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final String dishJson = objectMapper.writeValueAsString(dishDto);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/api/v0/dishes/" + pathVariableId, dishDto)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(dishJson))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test

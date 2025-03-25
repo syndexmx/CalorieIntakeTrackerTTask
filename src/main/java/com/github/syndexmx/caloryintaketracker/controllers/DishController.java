@@ -57,9 +57,12 @@ public class DishController {
         if (!id.equals(dish.getId())) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
+        if (!dishService.isPresent(id)) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
         Optional<Dish> optionalSavedDish = dishService.save(dish);
         if (optionalSavedDish.isEmpty()) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
         }
         DishDto savedDishDto = dishToDishDto(optionalSavedDish.get());
         ResponseEntity<DishDto> responseEntity = new ResponseEntity<DishDto>(

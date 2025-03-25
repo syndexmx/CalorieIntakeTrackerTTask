@@ -38,6 +38,11 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
+    public boolean isPresent(Long id) {
+        return dishRepository.existsById(id);
+    }
+
+    @Override
     @Transactional
     public Optional<Dish> save(Dish dishToSave) {
         boolean exists = dishRepository.existsById(dishToSave.getId());
