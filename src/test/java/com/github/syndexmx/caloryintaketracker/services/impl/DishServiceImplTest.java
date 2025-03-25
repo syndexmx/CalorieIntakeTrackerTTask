@@ -76,12 +76,13 @@ public class DishServiceImplTest {
     @Test
     public void testThatDishIsSaved() {
         final Dish dish = TestDishes.getTestDish();
-        final Optional<Dish> optionalDish = Optional.ofNullable(dish);
-        when(dishRepository.save(eq(dish))).thenReturn(optionalDish);
+        final Optional<Dish> optionalDish = Optional.of(dish);
+        when(dishRepository.save(eq(dish))).thenReturn(Optional.of(dish));
         final Optional<Dish> optionalSavedDish = underTest.save(dish);
-        final Dish savedDish = optionalSavedDish.orElse(null);
+        final Dish savedDish = optionalSavedDish.get();
         assertEquals(dish, savedDish);
     }
     */
+
 
 }

@@ -15,5 +15,6 @@ public interface DishService {
     Optional<Dish> findById(Long id);
     boolean isPresent(Long id);
     Optional<Dish> save(Dish generic);
+    void deleteById(Long id);
 
 }

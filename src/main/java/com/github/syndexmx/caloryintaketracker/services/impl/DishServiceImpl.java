@@ -52,4 +52,9 @@ public class DishServiceImpl implements DishService {
         final Dish dishSaved = dishRepository.save(dishToSave);
         return Optional.ofNullable(dishSaved);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        dishRepository.deleteById(id);
+    }
 }

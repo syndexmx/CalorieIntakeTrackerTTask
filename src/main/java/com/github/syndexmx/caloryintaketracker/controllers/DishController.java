@@ -70,4 +70,9 @@ public class DishController {
         return responseEntity;
     }
 
+    @DeleteMapping("/api/v0/dishes/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        dishService.deleteById(id);
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
+    }
 }

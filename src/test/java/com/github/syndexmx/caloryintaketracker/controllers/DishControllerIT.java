@@ -135,4 +135,19 @@ public class DishControllerIT {
                 .andExpect(MockMvcResultMatchers.content().json(updatedDishJson));
     }
 
+    @Test
+    public void testThatDeleteWorks() throws Exception {
+        DishDto dishDto = TestDishDtos.getTestDishDto();
+        dishDto.setId(null);
+        Dish savedDish = dishService.create(dishDtoToDish(dishDto));
+        DishDto updatedDishDto = TestDishDtos.getTestDishDto(2);
+        final Long id = savedDish.getId();
+        updatedDishDto.setId(id);
+        final ObjectMapper updatedObjectMapper = new ObjectMapper();
+        final String updatedDishJson = updatedObjectMapper.writeValueAsString(updatedDishDto);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/api/v0/dishes/" + id, updatedDishDto))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
 }
