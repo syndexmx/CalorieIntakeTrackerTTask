@@ -89,4 +89,36 @@ public class DishControllerIT {
                 .andExpect(MockMvcResultMatchers.content().json(genericJson));
     }
 
+    @Test
+    public void testThatUpdateReturnsConflictWhenIdMismatch() throws Exception {
+        final DishDto dishDto = TestDishDtos.getTestDishDto();
+        final DishDto dishDto2 = TestDishDtos.getTestDishDto(2);
+        final Long pathVariableId = dishDto2.getId();
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final String dishJson = objectMapper.writeValueAsString(dishDto);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/api/v0/dishes/" + pathVariableId, dishDto)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(dishJson))
+                .andExpect(MockMvcResultMatchers.status().isConflict());
+    }
+
+    @Test
+    public void testThatUpdateWorks() throws Exception {
+        DishDto dishDto = TestDishDtos.getTestDishDto();
+        dishDto.setId(null);
+        Dish savedDish = dishService.create(dishDtoToDish(dishDto));
+        DishDto updatedDishDto = TestDishDtos.getTestDishDto(2);
+        final Long id = savedDish.getId();
+        updatedDishDto.setId(id);
+        final ObjectMapper updatedObjectMapper = new ObjectMapper();
+        final String updatedDishJson = updatedObjectMapper.writeValueAsString(updatedDishDto);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/api/v0/dishes/" + id, updatedDishDto)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedDishJson))
+                .andExpect(MockMvcResultMatchers.status().isAccepted())
+                .andExpect(MockMvcResultMatchers.content().json(updatedDishJson));
+    }
+
 }

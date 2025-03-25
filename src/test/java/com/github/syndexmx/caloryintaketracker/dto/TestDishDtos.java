@@ -4,7 +4,7 @@ public class TestDishDtos {
 
     public static DishDto getTestDishDto() {
         return DishDto.builder()
-                .id(1L)
+                .id(0L)
                 .name("Pizza")
                 .calories(1000)
                 .protein(5000)

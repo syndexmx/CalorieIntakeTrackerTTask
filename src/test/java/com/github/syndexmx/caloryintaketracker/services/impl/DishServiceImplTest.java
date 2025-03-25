@@ -72,4 +72,16 @@ public class DishServiceImplTest {
         assertEquals(Optional.of(dish), foundGeneric);
     }
 
+    /*
+    @Test
+    public void testThatDishIsSaved() {
+        final Dish dish = TestDishes.getTestDish();
+        final Optional<Dish> optionalDish = Optional.ofNullable(dish);
+        when(dishRepository.save(eq(dish))).thenReturn(optionalDish);
+        final Optional<Dish> optionalSavedDish = underTest.save(dish);
+        final Dish savedDish = optionalSavedDish.orElse(null);
+        assertEquals(dish, savedDish);
+    }
+    */
+
 }

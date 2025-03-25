@@ -4,7 +4,7 @@ public class TestDishes {
 
     public static Dish getTestDish() {
         return Dish.builder()
-                .id(1L)
+                .id(0L)
                 .name("Pizza")
                 .calories(1000)
                 .protein(5000)
