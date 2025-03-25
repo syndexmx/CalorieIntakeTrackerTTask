@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ByDayHistoryController {
 
     @GetMapping("/api/v0/bydayreports/{userid}")
-    public ResponseEntity<DishDto> findById(@PathVariable(name = "userid") String id) {
+    public ResponseEntity<Object> findById(@PathVariable(name = "userid") String id) {
         // TODO : implement daily reports
-        return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>("Not implemeneted", HttpStatus.NOT_IMPLEMENTED);
     }
 
 }

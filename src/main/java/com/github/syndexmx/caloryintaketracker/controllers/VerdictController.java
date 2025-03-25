@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class VerdictController {
 
     @GetMapping("/api/v0/dailyverdicts/{userid}")
-    public ResponseEntity<DishDto> findById(@PathVariable(name = "userid") String id,
+    public ResponseEntity<Object> findById(@PathVariable(name = "userid") String id,
                                             @PathVariable(name = "date") String dateString) {
         // TODO : implement daily reports
-        return new ResponseEntity<>(null, HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>("Not implemeneted", HttpStatus.NOT_IMPLEMENTED);
     }
 
 }
