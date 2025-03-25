@@ -38,7 +38,7 @@ public class DishControllerIT {
 
     @Test
     public void testThatDishIsCreated() throws Exception {
-        DishDto dishDto = TestDishDtos.getTestDishDto();
+        DishDto dishDto = TestDishDtos.getTestDishDto(1);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String dishJson = objectMapper.writeValueAsString(dishDto);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v0/dishes")
@@ -70,7 +70,7 @@ public class DishControllerIT {
     public void testThatRetrieveReturnsNotFoundWhenAbsent() throws Exception {
         final Long nonExistentId = Long.MIN_VALUE;
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/api/v0/generics/" + nonExistentId))
+                MockMvcRequestBuilders.get("/api/v0/users/" + nonExistentId))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
