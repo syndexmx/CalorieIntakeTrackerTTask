@@ -13,5 +13,6 @@ public interface DishService {
     Dish create(Dish dish);
     List<Dish> listAll();
     Optional<Dish> findById(Long id);
+    Optional<Dish> save(Dish generic);
 
 }

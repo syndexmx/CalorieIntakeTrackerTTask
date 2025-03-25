@@ -36,4 +36,15 @@ public class DishServiceImpl implements DishService {
         final Optional<Dish> dishFound = dishRepository.findById(id);
         return dishFound;
     }
+
+    @Override
+    @Transactional
+    public Optional<Dish> save(Dish dishToSave) {
+        boolean exists = dishRepository.existsById(dishToSave.getId());
+        if (!exists) {
+            return Optional.empty();
+        }
+        final Dish dishSaved = dishRepository.save(dishToSave);
+        return Optional.ofNullable(dishSaved);
+    }
 }

@@ -50,4 +50,21 @@ public class DishController {
         return new ResponseEntity<>(dishDto, HttpStatus.FOUND);
     }
 
+    @PutMapping("/api/v0/dishes/{id}")
+    public ResponseEntity<DishDto> updateEntity(@PathVariable Long id,
+            @RequestBody DishDto dishDto) {
+        final Dish dish = dishDtoToDish(dishDto);
+        if (!id.equals(dish.getId())) {
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+        Optional<Dish> optionalSavedDish = dishService.save(dish);
+        if (optionalSavedDish.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
+        }
+        DishDto savedDishDto = dishToDishDto(optionalSavedDish.get());
+        ResponseEntity<DishDto> responseEntity = new ResponseEntity<DishDto>(
+                savedDishDto, HttpStatus.ACCEPTED);
+        return responseEntity;
+    }
+
 }
