@@ -1,6 +1,7 @@
 package com.github.syndexmx.caloryintaketracker.controllers;
 
 import com.github.syndexmx.caloryintaketracker.dto.UserDto;
+import com.github.syndexmx.caloryintaketracker.dto.validators.UserDtoValidator;
 import com.github.syndexmx.caloryintaketracker.entities.User;
 import com.github.syndexmx.caloryintaketracker.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,12 @@ public class UserController {
     }
 
     @PostMapping("/api/v0/users")
-    public ResponseEntity<UserDto> createDish(@RequestBody UserDto userDto) {
+    public ResponseEntity<Object> createDish(@RequestBody UserDto userDto) {
+        try {
+            UserDtoValidator.validateUserDto(userDto);
+        } catch (RuntimeException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
         userDto.setId(null);
         User receivedUser = userDtoToUser(userDto);
         User createdUser = userService.create(receivedUser);
