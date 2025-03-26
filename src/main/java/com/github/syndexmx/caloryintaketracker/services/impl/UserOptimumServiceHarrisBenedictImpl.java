@@ -13,10 +13,10 @@ public class UserOptimumServiceHarrisBenedictImpl implements UserOptimumService 
     @Override
     public Integer getOptimalDailyCalorieIntake(User user, LocalDate date) {
         if (user.getSex() == Sexes.MALE) {
-            return 66 + (13750 * user.getWeight()) + (5003 * user.getHeight() / 1000) -
+            return 66 + (13750 * user.getWeight() / 1000_0000) + (5003 * user.getHeight() / 1000) -
                     (6775 * user.getAgeAtDate(date) / 1000);
             } else {
-            return 655 + (9563 * user.getWeight() / 1000) + (1850 * user.getHeight() / 1000) -
+            return 655 + (9563 * user.getWeight() / 1000_0000) + (1850 * user.getHeight() / 1000) -
                     (4676 * user.getAgeAtDate(date) / 1000);
             }
         }
