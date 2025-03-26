@@ -1,6 +1,9 @@
 package com.github.syndexmx.caloryintaketracker.entities;
 
+import com.github.syndexmx.caloryintaketracker.dto.MealDto;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class TestUsers {
 
@@ -14,6 +17,7 @@ public class TestUsers {
                 .height(165)
                 .weight(65000)
                 .aim(Aims.KEEPING)
+                .mealList(new ArrayList<Meal>())
                 .build();
     }
 
@@ -28,6 +32,7 @@ public class TestUsers {
                     .height(160)
                     .weight(55000)
                     .aim(Aims.LOOSING)
+                    .mealList(new ArrayList<Meal>())
                     .build();
         }
         return User.builder()
@@ -39,6 +44,7 @@ public class TestUsers {
                 .height(180)
                 .weight(90000)
                 .aim(Aims.GAINING)
+                .mealList(new ArrayList<Meal>())
                 .build();
     }
 

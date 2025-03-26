@@ -82,7 +82,7 @@ public class UserControllerIT {
         user.setId(null);
         final User userSaved = userService.create(user);
         final long id = userSaved.getId();
-        final UserDto savedUserDto = userToUserDto(userSaved);
+        final UserDto userDto = userToUserDto(userSaved);
         user.setId(id);
         final ObjectMapper objectMapper = new ObjectMapper();
         final String genericJson = objectMapper.writeValueAsString(userToUserDto(user));
