@@ -1,4 +1,5 @@
 spring.application.name=caloryintaketracker
+server.port=8080
 
 #DataSource
 spring.datasource.url=jdbc:postgresql://localhost:5432/caloriesdb?currentSchema=public
