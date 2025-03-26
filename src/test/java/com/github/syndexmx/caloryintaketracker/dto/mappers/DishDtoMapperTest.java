@@ -1,9 +1,9 @@
 package com.github.syndexmx.caloryintaketracker.dto.mappers;
 
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
-import com.github.syndexmx.caloryintaketracker.dto.TestDishDtos;
+import com.github.syndexmx.caloryintaketracker.dto.testkit.TestDishDtos;
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
-import com.github.syndexmx.caloryintaketracker.entities.TestDishes;
+import com.github.syndexmx.caloryintaketracker.entities.testkit.TestDishes;
 import org.junit.jupiter.api.Test;
 
 import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishDtoMapper.dishDtoToDish;

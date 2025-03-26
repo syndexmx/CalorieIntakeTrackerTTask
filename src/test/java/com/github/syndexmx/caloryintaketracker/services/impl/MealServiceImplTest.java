@@ -1,7 +1,7 @@
 package com.github.syndexmx.caloryintaketracker.services.impl;
 
 import com.github.syndexmx.caloryintaketracker.entities.Meal;
-import com.github.syndexmx.caloryintaketracker.entities.TestMeals;
+import com.github.syndexmx.caloryintaketracker.entities.testkit.TestMeals;
 import com.github.syndexmx.caloryintaketracker.repositories.MealRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

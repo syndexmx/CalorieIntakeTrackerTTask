@@ -1,21 +1,23 @@
-package com.github.syndexmx.caloryintaketracker.entities;
+package com.github.syndexmx.caloryintaketracker.dto.testkit;
 
-public class TestDishes {
+import com.github.syndexmx.caloryintaketracker.dto.DishDto;
 
-    public static Dish getTestDish() {
-        return Dish.builder()
+public class TestDishDtos {
+
+    public static DishDto getTestDishDto() {
+        return DishDto.builder()
                 .id(0L)
                 .name("Pizza")
                 .calories(1000)
                 .protein(5000)
                 .lipids(20000)
                 .carbohydrates(25000)
-        .build();
+                .build();
     }
 
-    public static Dish getTestDish(int index) {
+    public static DishDto getTestDishDto(int index) {
         if (index == 1) {
-            return Dish.builder()
+            return DishDto.builder()
                     .id(1L)
                     .name("Juice")
                     .calories(3000)
@@ -24,7 +26,7 @@ public class TestDishes {
                     .carbohydrates(30000)
                     .build();
         }
-        return Dish.builder()
+        return DishDto.builder()
                 .id(1000L)
                 .name("Apple")
                 .calories(100)
@@ -33,5 +35,4 @@ public class TestDishes {
                 .carbohydrates(33000)
                 .build();
     }
-
 }

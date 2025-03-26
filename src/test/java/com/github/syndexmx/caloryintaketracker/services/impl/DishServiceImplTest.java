@@ -1,11 +1,8 @@
 package com.github.syndexmx.caloryintaketracker.services.impl;
 
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
-import com.github.syndexmx.caloryintaketracker.entities.TestDishes;
-import com.github.syndexmx.caloryintaketracker.entities.TestUsers;
-import com.github.syndexmx.caloryintaketracker.entities.User;
+import com.github.syndexmx.caloryintaketracker.entities.testkit.TestDishes;
 import com.github.syndexmx.caloryintaketracker.repositories.DishRepository;
-import com.github.syndexmx.caloryintaketracker.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

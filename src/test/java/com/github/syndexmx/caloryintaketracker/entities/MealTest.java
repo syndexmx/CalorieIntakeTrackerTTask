@@ -1,5 +1,6 @@
 package com.github.syndexmx.caloryintaketracker.entities;
 
+import com.github.syndexmx.caloryintaketracker.entities.testkit.TestDishes;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

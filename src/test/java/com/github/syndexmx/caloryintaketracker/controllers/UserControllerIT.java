@@ -2,10 +2,10 @@ package com.github.syndexmx.caloryintaketracker.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
-import com.github.syndexmx.caloryintaketracker.dto.TestDishDtos;
-import com.github.syndexmx.caloryintaketracker.dto.TestUserDtos;
+import com.github.syndexmx.caloryintaketracker.dto.testkit.TestDishDtos;
+import com.github.syndexmx.caloryintaketracker.dto.testkit.TestUserDtos;
 import com.github.syndexmx.caloryintaketracker.dto.UserDto;
-import com.github.syndexmx.caloryintaketracker.entities.TestUsers;
+import com.github.syndexmx.caloryintaketracker.entities.testkit.TestUsers;
 import com.github.syndexmx.caloryintaketracker.entities.User;
 import com.github.syndexmx.caloryintaketracker.services.UserService;
 import org.junit.jupiter.api.Test;

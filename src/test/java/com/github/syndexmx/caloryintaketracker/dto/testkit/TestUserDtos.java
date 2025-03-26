@@ -1,7 +1,7 @@
-package com.github.syndexmx.caloryintaketracker.dto;
+package com.github.syndexmx.caloryintaketracker.dto.testkit;
 
-import com.github.syndexmx.caloryintaketracker.entities.Meal;
-import org.hibernate.dialect.function.array.ArrayAggFunction;
+import com.github.syndexmx.caloryintaketracker.dto.MealDto;
+import com.github.syndexmx.caloryintaketracker.dto.UserDto;
 
 import java.util.ArrayList;
 

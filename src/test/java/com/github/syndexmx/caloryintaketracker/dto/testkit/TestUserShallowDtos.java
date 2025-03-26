@@ -1,4 +1,7 @@
-package com.github.syndexmx.caloryintaketracker.dto;
+package com.github.syndexmx.caloryintaketracker.dto.testkit;
+
+import com.github.syndexmx.caloryintaketracker.dto.MealIdDto;
+import com.github.syndexmx.caloryintaketracker.dto.UserShallowDto;
 
 import java.util.ArrayList;
 

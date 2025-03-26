@@ -1,6 +1,9 @@
-package com.github.syndexmx.caloryintaketracker.entities;
+package com.github.syndexmx.caloryintaketracker.entities.testkit;
 
-import com.github.syndexmx.caloryintaketracker.dto.MealDto;
+import com.github.syndexmx.caloryintaketracker.entities.Aims;
+import com.github.syndexmx.caloryintaketracker.entities.Meal;
+import com.github.syndexmx.caloryintaketracker.entities.Sexes;
+import com.github.syndexmx.caloryintaketracker.entities.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
