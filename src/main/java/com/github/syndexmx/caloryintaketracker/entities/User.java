@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -29,6 +30,9 @@ public class User {
     private Integer weight; // weight in grams
     private Integer height; // height in cm
     private Aims aim;
+
+    @OneToMany
+    private List<Meal> mealList;
 
     public int getAgeAtDate(LocalDate localDate) {
         return Period.between(birthDate, localDate).getYears();

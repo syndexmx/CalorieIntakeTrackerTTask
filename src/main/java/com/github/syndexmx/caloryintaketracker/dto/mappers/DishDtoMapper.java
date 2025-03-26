@@ -27,4 +27,10 @@ public class DishDtoMapper {
                 .build();
     }
 
+    public static Dish dishDtoToDishIdOnly(DishDto dishDto) {
+        return Dish.builder()
+                .id(dishDto.getId())
+                .build();
+    }
+
 }

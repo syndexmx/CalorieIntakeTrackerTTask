@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,5 +22,16 @@ public class Meal {
     Long id;
 
     private LocalDate date;
+
+    @ManyToMany
+    private List<Dish> dishList;
+
+    public Integer getCalories() {
+        int calories = 0;
+        for (Dish dish : dishList) {
+            calories += dish.getCalories();
+        }
+        return calories;
+    }
 
 }

@@ -27,5 +27,4 @@ public class Dish {
     Integer lipids; // mg per unit
 
     Integer carbohydrates; // mg per unit
-
 }

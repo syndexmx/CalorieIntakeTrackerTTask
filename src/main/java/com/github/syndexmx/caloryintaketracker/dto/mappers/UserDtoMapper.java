@@ -7,6 +7,8 @@ import com.github.syndexmx.caloryintaketracker.entities.User;
 
 import java.time.LocalDate;
 
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.MealDtoMapper.*;
+
 public class UserDtoMapper {
 
     public static User userDtoToUser(UserDto userDto) {
@@ -19,6 +21,9 @@ public class UserDtoMapper {
                 .height(userDto.getHeight())
                 .weight(userDto.getWeight())
                 .aim(Aims.valueOf(userDto.getAim()))
+                .mealList(userDto.getMealList().stream()
+                        .map(mealDto -> mealDtoToMealIdOnly(mealDto))
+                        .toList())
                 .build();
     }
 
@@ -32,6 +37,9 @@ public class UserDtoMapper {
                 .height(user.getHeight())
                 .weight(user.getWeight())
                 .aim(user.getAim().toString())
+                .mealList(user.getMealList().stream()
+                        .map(meal -> mealToMealDto(meal))
+                        .toList())
                 .build();
     }
 
