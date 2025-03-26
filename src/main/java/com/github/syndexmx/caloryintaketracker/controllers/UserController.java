@@ -1,9 +1,9 @@
 package com.github.syndexmx.caloryintaketracker.controllers;
 
 import com.github.syndexmx.caloryintaketracker.dto.UserDto;
+import com.github.syndexmx.caloryintaketracker.dto.UserShallowDto;
 import com.github.syndexmx.caloryintaketracker.entities.User;
 import com.github.syndexmx.caloryintaketracker.services.UserService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.caloryintaketracker.dto.mappers.UserDtoMapper.userDtoToUser;
-import static com.github.syndexmx.caloryintaketracker.dto.mappers.UserDtoMapper.userToUserDto;
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.UserDtoMapper.*;
 
 @RestController
 @RequestMapping
@@ -31,7 +30,7 @@ public class UserController {
         userDto.setId(null);
         User receivedUser = userDtoToUser(userDto);
         User createdUser = userService.create(receivedUser);
-        UserDto returnUserDto = userToUserDto(createdUser);
+        UserShallowDto returnUserDto = userToUserDtoShallow(createdUser);
         return new ResponseEntity<>(returnUserDto, HttpStatus.CREATED);
     }
 
@@ -55,7 +54,7 @@ public class UserController {
     }
 
     @PutMapping("/api/v0/users/{id}")
-    public ResponseEntity<UserDto> updateEntity(@PathVariable Long id,
+    public ResponseEntity<UserShallowDto> updateEntity(@PathVariable Long id,
                                                 @RequestBody @Validated UserDto userDto) {
         final User user = userDtoToUser(userDto);
         if (!id.equals(user.getId())) {
@@ -68,8 +67,8 @@ public class UserController {
         if (optionalSavedUser.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
         }
-        UserDto savedUserDto = userToUserDto(optionalSavedUser.get());
-        ResponseEntity<UserDto> responseEntity = new ResponseEntity<UserDto>(
+        UserShallowDto savedUserDto = userToUserDtoShallow(optionalSavedUser.get());
+        ResponseEntity<UserShallowDto> responseEntity = new ResponseEntity<UserShallowDto>(
                 savedUserDto, HttpStatus.ACCEPTED);
         return responseEntity;
     }

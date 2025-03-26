@@ -1,6 +1,7 @@
 package com.github.syndexmx.caloryintaketracker.dto.mappers;
 
 import com.github.syndexmx.caloryintaketracker.dto.UserDto;
+import com.github.syndexmx.caloryintaketracker.dto.UserShallowDto;
 import com.github.syndexmx.caloryintaketracker.entities.Aims;
 import com.github.syndexmx.caloryintaketracker.entities.Sexes;
 import com.github.syndexmx.caloryintaketracker.entities.User;
@@ -43,4 +44,19 @@ public class UserDtoMapper {
                 .build();
     }
 
+    public static UserShallowDto userToUserDtoShallow(User user) {
+        return UserShallowDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .birthDate(user.getBirthDate().toString())
+                .sex(user.getSex().toString())
+                .height(user.getHeight())
+                .weight(user.getWeight())
+                .aim(user.getAim().toString())
+                .mealList(user.getMealList().stream()
+                        .map(meal -> mealToMealDtoIdOnly(meal))
+                        .toList())
+                .build();
+    }
 }

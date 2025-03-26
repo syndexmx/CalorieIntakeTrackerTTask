@@ -1,6 +1,7 @@
 package com.github.syndexmx.caloryintaketracker.dto.mappers;
 
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
+import com.github.syndexmx.caloryintaketracker.dto.DishIdDto;
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
 
 public class DishDtoMapper {
@@ -30,6 +31,12 @@ public class DishDtoMapper {
     public static Dish dishDtoToDishIdOnly(DishDto dishDto) {
         return Dish.builder()
                 .id(dishDto.getId())
+                .build();
+    }
+
+    public static DishIdDto dishToDishDtoIdOnly(Dish dish) {
+        return DishIdDto.builder()
+                .id(dish.getId())
                 .build();
     }
 

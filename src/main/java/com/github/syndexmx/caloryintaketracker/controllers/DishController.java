@@ -3,7 +3,6 @@ package com.github.syndexmx.caloryintaketracker.controllers;
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
 import com.github.syndexmx.caloryintaketracker.services.DishService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

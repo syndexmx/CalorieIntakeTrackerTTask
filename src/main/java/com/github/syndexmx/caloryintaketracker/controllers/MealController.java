@@ -1,9 +1,9 @@
 package com.github.syndexmx.caloryintaketracker.controllers;
 
 import com.github.syndexmx.caloryintaketracker.dto.MealDto;
+import com.github.syndexmx.caloryintaketracker.dto.MealShallowDto;
 import com.github.syndexmx.caloryintaketracker.entities.Meal;
 import com.github.syndexmx.caloryintaketracker.services.MealService;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-import static com.github.syndexmx.caloryintaketracker.dto.mappers.MealDtoMapper.mealDtoToMeal;
-import static com.github.syndexmx.caloryintaketracker.dto.mappers.MealDtoMapper.mealToMealDto;
+import static com.github.syndexmx.caloryintaketracker.dto.mappers.MealDtoMapper.*;
 
 @RestController
 @RequestMapping
@@ -27,10 +26,10 @@ public class MealController {
     }
 
     @PostMapping("/api/v0/meals")
-    public ResponseEntity<MealDto> createDish(@RequestBody @Validated MealDto mealDto) {
+    public ResponseEntity<MealShallowDto> createDish(@RequestBody @Validated MealDto mealDto) {
         mealDto.setId(null);
         Meal createdMeal = mealService.create(mealDtoToMeal(mealDto));
-        MealDto returnMealDto = mealToMealDto(createdMeal);
+        MealShallowDto returnMealDto = mealToMealDtoShallow(createdMeal);
         return new ResponseEntity<>(returnMealDto, HttpStatus.CREATED);
     }
 
@@ -54,7 +53,7 @@ public class MealController {
     }
 
     @PutMapping("/api/v0/meals/{id}")
-    public ResponseEntity<MealDto> updateEntity(@PathVariable Long id,
+    public ResponseEntity<MealShallowDto> updateEntity(@PathVariable Long id,
                                                 @RequestBody @Validated MealDto mealDto) {
         final Meal meal = mealDtoToMeal(mealDto);
         if (!id.equals(meal.getId())) {
@@ -67,8 +66,8 @@ public class MealController {
         if (optionalSavedMeal.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
         }
-        MealDto savedMealDto = mealToMealDto(optionalSavedMeal.get());
-        ResponseEntity<MealDto> responseEntity = new ResponseEntity<MealDto>(
+        MealShallowDto savedMealDto = mealToMealDtoShallow(optionalSavedMeal.get());
+        ResponseEntity<MealShallowDto> responseEntity = new ResponseEntity<MealShallowDto>(
                 savedMealDto, HttpStatus.ACCEPTED);
         return responseEntity;
     }
