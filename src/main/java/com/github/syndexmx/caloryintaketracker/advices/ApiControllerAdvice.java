@@ -11,6 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @RestControllerAdvice
 public class ApiControllerAdvice {
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String processValidationError(MethodArgumentNotValidException ex) {
+        BindingResult result = ex.getBindingResult();
+        FieldError error = result.getFieldError();
+        return error.getDefaultMessage();
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -25,15 +34,6 @@ public class ApiControllerAdvice {
                 HttpStatus.BAD_REQUEST,
                 messageBuilder.toString());
         return response;
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public String processValidationError(MethodArgumentNotValidException ex) {
-        BindingResult result = ex.getBindingResult();
-        FieldError error = result.getFieldError();
-        return error.getDefaultMessage();
     }
 
 }
