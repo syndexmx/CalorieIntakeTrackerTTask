@@ -77,7 +77,7 @@ public class UserControllerIT {
     }
 
     @Test
-    public void testThatRetrieveReturnsDishWhenExists() throws Exception {
+    public void testThatRetrieveReturnsUserWhenExists() throws Exception {
         User user = TestUsers.getTestUser();
         user.setId(null);
         final User userSaved = userService.create(user);

@@ -1,5 +1,10 @@
 package com.github.syndexmx.caloryintaketracker.dto;
 
+import com.github.syndexmx.caloryintaketracker.entities.Meal;
+import org.hibernate.dialect.function.array.ArrayAggFunction;
+
+import java.util.ArrayList;
+
 public class TestUserDtos {
 
     public static UserDto getTestUserDto() {
@@ -12,6 +17,7 @@ public class TestUserDtos {
                 .height(165)
                 .weight(65000)
                 .aim("KEEPING")
+                .mealList(new ArrayList<MealDto>())
                 .build();
     }
 
@@ -26,6 +32,7 @@ public class TestUserDtos {
                     .height(160)
                     .weight(55000)
                     .aim("LOOSING")
+                    .mealList(new ArrayList<MealDto>())
                     .build();
         }
         return UserDto.builder()
@@ -37,6 +44,7 @@ public class TestUserDtos {
                 .height(180)
                 .weight(90000)
                 .aim("GAINING")
+                .mealList(new ArrayList<MealDto>())
                 .build();
     }
 }
