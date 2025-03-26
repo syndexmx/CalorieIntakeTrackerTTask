@@ -3,8 +3,10 @@ package com.github.syndexmx.caloryintaketracker.controllers;
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
 import com.github.syndexmx.caloryintaketracker.services.DishService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishDtoMapper.
 
 @RestController
 @RequestMapping
+@Validated
 public class DishController {
 
     private final DishService dishService;
@@ -24,7 +27,7 @@ public class DishController {
     }
 
     @PostMapping("/api/v0/dishes")
-    public ResponseEntity<DishDto> createDish(@RequestBody DishDto dishDto) {
+    public ResponseEntity<DishDto> createDish(@RequestBody @Validated DishDto dishDto) {
         dishDto.setId(null);
         Dish createdDish = dishService.create(dishDtoToDish(dishDto));
         DishDto returnDishDto = dishToDishDto(createdDish);
@@ -52,7 +55,7 @@ public class DishController {
 
     @PutMapping("/api/v0/dishes/{id}")
     public ResponseEntity<DishDto> updateEntity(@PathVariable Long id,
-            @RequestBody DishDto dishDto) {
+            @RequestBody @Validated DishDto dishDto) {
         final Dish dish = dishDtoToDish(dishDto);
         if (!id.equals(dish.getId())) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);

@@ -3,8 +3,10 @@ package com.github.syndexmx.caloryintaketracker.controllers;
 import com.github.syndexmx.caloryintaketracker.dto.MealDto;
 import com.github.syndexmx.caloryintaketracker.entities.Meal;
 import com.github.syndexmx.caloryintaketracker.services.MealService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import static com.github.syndexmx.caloryintaketracker.dto.mappers.MealDtoMapper.
 
 @RestController
 @RequestMapping
+@Validated
 public class MealController {
 
     private final MealService mealService;
@@ -24,7 +27,7 @@ public class MealController {
     }
 
     @PostMapping("/api/v0/meals")
-    public ResponseEntity<MealDto> createDish(@RequestBody MealDto mealDto) {
+    public ResponseEntity<MealDto> createDish(@RequestBody @Validated MealDto mealDto) {
         mealDto.setId(null);
         Meal createdMeal = mealService.create(mealDtoToMeal(mealDto));
         MealDto returnMealDto = mealToMealDto(createdMeal);
@@ -52,7 +55,7 @@ public class MealController {
 
     @PutMapping("/api/v0/meals/{id}")
     public ResponseEntity<MealDto> updateEntity(@PathVariable Long id,
-                                                @RequestBody MealDto mealDto) {
+                                                @RequestBody @Validated MealDto mealDto) {
         final Meal meal = mealDtoToMeal(mealDto);
         if (!id.equals(meal.getId())) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);

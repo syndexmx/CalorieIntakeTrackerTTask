@@ -1,11 +1,12 @@
 package com.github.syndexmx.caloryintaketracker.controllers;
 
 import com.github.syndexmx.caloryintaketracker.dto.UserDto;
-import com.github.syndexmx.caloryintaketracker.dto.validators.UserDtoValidator;
 import com.github.syndexmx.caloryintaketracker.entities.User;
 import com.github.syndexmx.caloryintaketracker.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import static com.github.syndexmx.caloryintaketracker.dto.mappers.UserDtoMapper.
 
 @RestController
 @RequestMapping
+@Validated
 public class UserController {
 
     private final UserService userService;
@@ -25,12 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/api/v0/users")
-    public ResponseEntity<Object> createDish(@RequestBody UserDto userDto) {
-        try {
-            UserDtoValidator.validateUserDto(userDto);
-        } catch (RuntimeException ex) {
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }
+    public ResponseEntity<Object> createDish(@RequestBody @Validated UserDto userDto) {
         userDto.setId(null);
         User receivedUser = userDtoToUser(userDto);
         User createdUser = userService.create(receivedUser);
@@ -59,7 +56,7 @@ public class UserController {
 
     @PutMapping("/api/v0/users/{id}")
     public ResponseEntity<UserDto> updateEntity(@PathVariable Long id,
-                                                @RequestBody UserDto userDto) {
+                                                @RequestBody @Validated UserDto userDto) {
         final User user = userDtoToUser(userDto);
         if (!id.equals(user.getId())) {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
