@@ -68,8 +68,8 @@ public class UserServiceImplTest {
         final User user = TestUsers.getTestUser();
         final Long id = user.getId();
         when(userRepository.findById(eq(id))).thenReturn(Optional.of(user));
-        final Optional<User> foundGeneric = underTest.findById(id);
-        assertEquals(Optional.of(user), foundGeneric);
+        final Optional<User> optionalFoundUser = underTest.findById(id);
+        assertEquals(Optional.of(user), optionalFoundUser);
     }
 
 }
