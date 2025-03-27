@@ -15,6 +15,8 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "meals")
+@NamedEntityGraph(name = "meal_entity-graph",
+        attributeNodes = @NamedAttributeNode("dishList"))
 public class Meal {
 
     @Id
