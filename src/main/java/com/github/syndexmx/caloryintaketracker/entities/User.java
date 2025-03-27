@@ -17,6 +17,8 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "users")
+@NamedEntityGraph(name = "user_entity-graph",
+        attributeNodes = @NamedAttributeNode("mealList"))
 public class User {
 
     @Id
