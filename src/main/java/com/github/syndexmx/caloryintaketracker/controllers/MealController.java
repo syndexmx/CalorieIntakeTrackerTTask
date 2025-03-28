@@ -4,6 +4,8 @@ import com.github.syndexmx.caloryintaketracker.dto.MealDto;
 import com.github.syndexmx.caloryintaketracker.dto.MealShallowDto;
 import com.github.syndexmx.caloryintaketracker.entities.Meal;
 import com.github.syndexmx.caloryintaketracker.services.MealService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +19,7 @@ import static com.github.syndexmx.caloryintaketracker.dto.mappers.MealDtoMapper.
 @RestController
 @RequestMapping
 @Validated
+@Tag(name = "Meal", description = "API приема пищи")
 public class MealController {
 
     private final MealService mealService;
@@ -26,6 +29,8 @@ public class MealController {
     }
 
     @PostMapping("/api/v0/meals")
+    @Operation(summary = "Добавление приема пищи",
+            description = "Позволяет добавить новый прием пищи. id не важен, присваивается системой")
     public ResponseEntity<MealShallowDto> createDish(@RequestBody @Validated MealDto mealDto) {
         mealDto.setId(null);
         Meal createdMeal = mealService.create(mealDtoToMeal(mealDto));
@@ -34,6 +39,8 @@ public class MealController {
     }
 
     @GetMapping("/api/v0/meals")
+    @Operation(summary = "Получение списка приемов пищи",
+            description = "Возвращает список все приемы пищи")
     public ResponseEntity<List<MealDto>> listAllDishes() {
         List<Meal> mealList = mealService.listAll();
         List<MealDto> mealDtoList = mealList.stream()
@@ -43,6 +50,8 @@ public class MealController {
     }
 
     @GetMapping("/api/v0/meals/{id}")
+    @Operation(summary = "Получение данных приема пищи по id",
+            description = "Возвращает данных приема пищи")
     public ResponseEntity<MealDto> findById(@PathVariable Long id) {
         Optional<Meal> optionalMeal = mealService.findById(id);
         if (optionalMeal.isEmpty()) {
@@ -53,6 +62,8 @@ public class MealController {
     }
 
     @PutMapping("/api/v0/meals/{id}")
+    @Operation(summary = "Коррекция приема пищи по id",
+            description = "Позволяет обновить данные приема пищи, id в пути и в переданных данных должны совпадать")
     public ResponseEntity<MealShallowDto> updateEntity(@PathVariable Long id,
                                                 @RequestBody @Validated MealDto mealDto) {
         final Meal meal = mealDtoToMeal(mealDto);
@@ -73,6 +84,8 @@ public class MealController {
     }
 
     @DeleteMapping("/api/v0/meals/{id}")
+    @Operation(summary = "Удалить прием пищи по id",
+            description = "Удаляет данные приема пищи из базы")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         mealService.deleteById(id);
         return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
