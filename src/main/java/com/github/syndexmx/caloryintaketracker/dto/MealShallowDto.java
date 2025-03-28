@@ -1,6 +1,7 @@
 package com.github.syndexmx.caloryintaketracker.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Schema(description = "Прием пищи с легким списком (только id) блюд")
 public class MealShallowDto {
 
     Long id;
