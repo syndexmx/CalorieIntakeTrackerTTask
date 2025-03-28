@@ -3,6 +3,8 @@ package com.github.syndexmx.caloryintaketracker.controllers;
 import com.github.syndexmx.caloryintaketracker.dto.DishDto;
 import com.github.syndexmx.caloryintaketracker.entities.Dish;
 import com.github.syndexmx.caloryintaketracker.services.DishService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +19,7 @@ import static com.github.syndexmx.caloryintaketracker.dto.mappers.DishDtoMapper.
 @RestController
 @RequestMapping
 @Validated
+@Tag(name = "Dish", description = "API блюда")
 public class DishController {
 
     private final DishService dishService;
@@ -26,6 +29,8 @@ public class DishController {
     }
 
     @PostMapping("/api/v0/dishes")
+    @Operation(summary = "Добавление блюда",
+            description = "Позволяет добавить новое блюдо. id не важен, присваивается системой")
     public ResponseEntity<DishDto> createDish(@RequestBody @Validated DishDto dishDto) {
         dishDto.setId(null);
         Dish createdDish = dishService.create(dishDtoToDish(dishDto));
@@ -34,6 +39,8 @@ public class DishController {
     }
 
     @GetMapping("/api/v0/dishes")
+    @Operation(summary = "Получение списка блюд",
+            description = "Возвращает список всех блюд")
     public ResponseEntity<List<DishDto>> listAllDishes() {
         List<Dish> dishList = dishService.listAll();
         List<DishDto> dishDtoList = dishList.stream()
@@ -43,6 +50,8 @@ public class DishController {
     }
 
     @GetMapping("/api/v0/dishes/{id}")
+    @Operation(summary = "Получение блюд по id",
+            description = "Возвращает данные блюда")
     public ResponseEntity<DishDto> findById(@PathVariable Long id) {
         Optional<Dish> optionalDish = dishService.findById(id);
         if (optionalDish.isEmpty()) {
@@ -53,6 +62,8 @@ public class DishController {
     }
 
     @PutMapping("/api/v0/dishes/{id}")
+    @Operation(summary = "Коррекция блюда по id",
+            description = "Позволяет обновить данные блюда, id в пути и в переданных данных должны совпадать")
     public ResponseEntity<DishDto> updateEntity(@PathVariable Long id,
             @RequestBody @Validated DishDto dishDto) {
         final Dish dish = dishDtoToDish(dishDto);
@@ -73,6 +84,8 @@ public class DishController {
     }
 
     @DeleteMapping("/api/v0/dishes/{id}")
+    @Operation(summary = "Удалить блюдо по id",
+            description = "Удаляет данные блюда из базы")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         dishService.deleteById(id);
         return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
